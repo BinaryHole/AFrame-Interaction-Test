@@ -3,22 +3,23 @@
     <meta charset="utf-8">
     <title>AFrame Interaction Test</title>
     <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+    <script src="./Scripts.js"></script>
   </head>
   <body>
-    <a-scene>
-      <a-sky color="cyan"></a-sky>
+    <a-scene fog="color: #42b7ff; density: 0; far: 50">
+      <a-sky color="#42b7ff"></a-sky>
 
-      <a-entity id="player" position="0 1.6 0">
-        <a-entity id="camera" camera look-controls wasd-controls></a-entity>
+      <a-entity id="player" position="0 1.6 0" player="isCarryingObject: true" rotation="" look-controls="" wasd-controls="">
+        <a-entity id="camera" camera="" data-aframe-inspector-original-camera=""></a-entity>
       </a-entity>
 
-      <a-entity id="bubble-spawner"
-        position="0 1.5 -4"
-        geometry="primitive: box; depth: 2; width: 0.5; height: 1;"
-        material="color: gray"
-      ></a-entity>
+      <a-entity id="spawning-device" scale="0.2 0.2 0.2" position="0 1.5 -4" geometry="depth: 1.97; width: 0.33; height: 0.91" material="color: gray" shadow>
+        <a-entity id="button" position="-0.27 0 0" geometry="primitive: cylinder; height: 0.23; radius: 0.36" rotation="0 0 90" material="color: #ac3939"></a-entity>
+      </a-entity>
 
-      <a-plane id="ground" color="#424242" height="50" width="50" rotation="-90 0 0"></a-plane>
+      <a-entity id="spawner" geometry="primitive: cylinder; height: 1.21; radius: 0.56" material="color: #ff7070" shadow=""></a-entity>
+
+      <a-plane id="ground" color="#424242" height="50" width="50" rotation="-90 0 0" shadow></a-plane>
     </a-scene>
   </body>
 </html>
