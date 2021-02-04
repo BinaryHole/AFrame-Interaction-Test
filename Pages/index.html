@@ -1,0 +1,24 @@
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>AFrame Interaction Test</title>
+    <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-sky color="cyan"></a-sky>
+
+      <a-entity id="player" position="0 1.6 0">
+        <a-entity id="camera" camera look-controls wasd-controls></a-entity>
+      </a-entity>
+
+      <a-entity id="bubble-spawner"
+        position="0 1.5 -4"
+        geometry="primitive: box; depth: 2; width: 0.5; height: 1;"
+        material="color: gray"
+      ></a-entity>
+
+      <a-plane id="ground" color="#424242" height="50" width="50" rotation="-90 0 0"></a-plane>
+    </a-scene>
+  </body>
+</html>
