@@ -1,14 +1,36 @@
 AFRAME.registerComponent('player', {
   schema: {
-    isCarryingObject: {type: 'boolean'}
+    isCarryingObject: {type: 'boolean', default: false}
   },
-  init: function() {
+
+  pickupObject: function() {
+    this.isCarryingObject = true;
+  },
+
+  dropObject: function() {
     this.isCarryingObject = false;
-    this.hasLogged = false;
-  },
-  update: function() {
-    if (!this.hasLogged) {
-      console.log("isCarrying: " + this.isCarryingObject);
-    }
   }
-})
+});
+
+AFRAME.registerComponent('spawning-device', {
+  schema: {
+    isActive: {type: 'boolean', default: false}
+  },
+
+  // Called when clicked, try to pickup the spawning-device
+  tryPickup: {
+
+  },
+
+  activate: {
+    this.isActive = true;
+
+    console.log("Spawning device activated.")
+  },
+
+  deactivate: {
+    this.isActive = false;
+
+    console.log("Spawning device deactivated.")
+  }
+});
