@@ -9,15 +9,17 @@
     <a-scene fog="color: #42b7ff; density: 0; far: 50">
       <a-sky color="#42b7ff"></a-sky>
 
-      <a-entity id="player" position="0 1.6 0" player rotation="" look-controls="" wasd-controls="">
+      <a-entity id="player" position="0 1.6 0" player="" look-controls="" wasd-controls="">
+        <a-entity cursor="rayOrigin:mouse;" raycaster="far:20; interval:200; objects:.interactive"></a-entity>
+        <a-entity class="holding-point" position="0.195 -0.17237 -0.71987" rotation="56.066212084731575 19.624377441025825 -84.45512491787362"></a-entity>
         <a-entity id="camera" camera="" data-aframe-inspector-original-camera=""></a-entity>
       </a-entity>
 
-      <a-entity spawning-device id="spawning-device" scale="0.2 0.2 0.2" position="0 1.5 -4" geometry="depth: 1.97; width: 0.33; height: 0.91" material="color: gray" shadow>
+      <a-entity class="interactive" spawning-device id="spawning-device" scale="0.2 0.2 0.2" position="-2 1.5 -4" geometry="depth: 1.97; width: 0.33; height: 0.91" material="color: gray" shadow>
         <a-entity id="button" position="-0.27 0 0" geometry="primitive: cylinder; height: 0.23; radius: 0.36" rotation="0 0 90" material="color: #ac3939"></a-entity>
       </a-entity>
 
-      <a-entity id="spawner" geometry="primitive: cylinder; height: 1.21; radius: 0.56" material="color: #ff7070" shadow=""></a-entity>
+      <a-entity id="spawner" position="0 0 -3" geometry="primitive: cylinder; height: 1.21; radius: 0.56" material="color: #ff7070" shadow=""></a-entity>
 
       <a-plane id="ground" color="#424242" height="50" width="50" rotation="-90 0 0" shadow></a-plane>
     </a-scene>
