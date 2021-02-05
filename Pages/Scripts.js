@@ -1,3 +1,27 @@
+AFRAME.registerComponent('bubble', {
+  schema: {
+    lifespan: {type: 'float', default: 5}
+  },
+  multiple: true,
+
+  init: function() {
+    this.startTime = new Date().getTime();
+    this.el.setAttribute('position', {x: 0, y: 0.49, z: -3});
+    this.el.setAttribute('geometry', {primitive: 'sphere', radius: 0.17});
+  },
+
+  tick: function(time, timeDelta) {
+    // check if the lifespan is over
+    if ((this.startTime-new Date().getTime())/1000 >= this.data.lifespan) {
+      // delete the bubble
+      this.el.parentNode.removeChild(this.el);
+    } else {
+      // move by vector
+      this.el.object3D.position.y += 0.001 * timeDelta;
+    }
+  }
+});
+
 AFRAME.registerComponent('player', {
   schema: {
     isCarryingObject: {type: 'boolean', default: false}
@@ -49,9 +73,13 @@ AFRAME.registerComponent('spawning-device', {
 
     // on spawning-device click
     this.el.addEventListener('click', function() {
-      console.log(self.isActive);
-      if (self.isActive) {
+      if (self.data.isActive) {
         console.log("Button triggered!");
+
+        // spawn a new bubble
+        var newBubble = document.createElement('a-entity');
+        newBubble.setAttribute('bubble', '');
+        document.querySelector('a-scene').appendChild(newBubble);
       } else {
         document.querySelector('#player').emit('requestPickup', {requestingObjectId: self.el.id});
       }
@@ -61,9 +89,14 @@ AFRAME.registerComponent('spawning-device', {
     button.addEventListener('click', function() {
       console.log("button clicked");
 
-      if (self.isActive) {
+      if (self.data.isActive) {
         // trigger the button
         console.log("Button triggered!");
+
+        // spawn a new bubble
+        var newBubble = document.createElement('a-entity');
+        newBubble.setAttribute('bubble', '');
+        document.querySelector('a-scene').appendChild(newBubble);
       } else {
         // trigger the click on the spawning-device
         self.emit('click');
@@ -73,12 +106,12 @@ AFRAME.registerComponent('spawning-device', {
 
     this.el.addEventListener('activate', function() {
       // activate the button
-      self.active = true;
+      self.data.isActive = true;
       console.log("Device activated");
     });
 
     this.el.addEventListener('deactivate', function() {
-      self.activate = false;
+      self.isActive = false;
     });
   },
 });
